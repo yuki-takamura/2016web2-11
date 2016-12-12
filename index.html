@@ -20,6 +20,15 @@
       </table>
     </section>
     
+    <section id = "file">
+      <h3>ドラッグアンドドロップでファイル取得</h3>
+      <div id = "drop" style = "width:700px; height:150px; padding:10px; border:3px solid"
+           ondragover = "onDragOver(event)"></div>
+      <p>ファイルプロパティ表示</p>
+      <div id = "info"></div>
+      <div id =" disp"></div>
+    </section>
+    
     <script type = "text/javascript">
       if(typeof sessionStorage === 'undefined'){
         window.alert("この環境ではWeb Storageが使えません");
@@ -72,7 +81,62 @@
           viewStorage();
         }
       }
-    </script>
+      
+      if(!window.File) {
+        window.alert("本ブラウザではFile APIが使えません");
+        }else{
+          document.getElementById("drop").addEventListener("drop", onDrop, false);
+        }
+      function onDrop(event){
+        var files = event.dataTransfer.files;
+        var info = document.getElementById("info");
+        var disp = document.getElementById("disp");
+        disp.innerHTML = "";
+        
+        for(var i = 0;i<files.length;i++){
+          var f = files[i];
+          info.innerHTML += "FailName : " + f.name + "FailType : " + f.type + "FailSize : " + f.size / 1000 + " KB " + "<br />";
+        
+        var reader = new FileReader();
+          
+          if(!f.type.mathc('image.*') && !f.type.mathc('text.*')){
+            alert("画像ファイルとテキストファイル以外は表示できません");
+            continue;
+          }
+          
+          reader.onerror = function(evt){
+            disp.innerHTML = "読み取り時にエラーが発生しました";
+          }
+          
+          if(f.type.mathc('image.*')){
+            reader.onload = funciton (evt){
+              var li = document.createElement('li');
+              var img = document.createElement('img');
+              img.src = evt.target.result;
+              li.appendChild(img);
+              li.innerHTML += "<br />";
+              disp.appendChild(li);
+            }
+            
+            reader.readAsDataURL(f);
+          }
+          
+          if(f.type.match('text.*')){
+            reader.onload = function(evt){
+              disp.innerHTML = reader.result;
+            }
+            
+            reader.readAsText(f, 'utf-8');
+          }
+        }
+        
+        event.preventDefault();
+      }
+      
+      function onDragOver(event){
+        event.preventDefault();
+      }
+   </script>
   </body>
 </html>
     
