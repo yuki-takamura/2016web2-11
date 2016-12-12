@@ -136,6 +136,24 @@
       // ⑥ブラウザ上でファイルを展開する挙動を抑止
       event.preventDefault(); 
     }
+    
+    if(!navigator.geolocation) {
+      alert("Geolocation APIを使用できません");
+      }
+    
+    function getPosition(){
+      navigator.geolocation.getCurrentPosition(successCallback,
+                                               errorCallback,
+                                               {enableHighAccuracy:true, timeout:1000,maximum:600000});
+    }
+    
+    function successCallback(position) {
+      alert("現在位置:緯度 " + position.coords.latitude + " / 経度 " + position.coords.longitude);
+    }
+    
+    function errorCallback(error){
+      alert("エラー: " + error.message);
+    }
   </script>
 
   </body>
