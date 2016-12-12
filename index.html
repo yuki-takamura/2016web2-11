@@ -92,7 +92,7 @@
       // ファイルの配列から1つずつファイルを選択
       for(var i=0; i< files.length; i++){
         var f = files[i];
-        info.innerHTML += "FileName :" + f.name + "FailType:" + f.type + "FileSize:" + f.size / 1000 + " KB " + "<br />";
+        info.innerHTML += "FileName :" + f.name + "FailType:" + f.type + "LastModified"+ f.lastModified + "FileSize:" + f.size / 1000 + " KB " + "<br />";
         // ①FileReaderオブジェクトの生成
         var reader = new FileReader();
         // ②画像ファイルかテキストファイルかを判定
