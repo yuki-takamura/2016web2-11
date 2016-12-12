@@ -99,7 +99,7 @@
         
         var reader = new FileReader();
           
-          if(!f.type.mathc('image.*') && !f.type.mathc('text.*')){
+          if(!f.type.match('image.*') && !f.type.match('text.*')){
             alert("画像ファイルとテキストファイル以外は表示できません");
             continue;
           }
@@ -108,7 +108,7 @@
             disp.innerHTML = "読み取り時にエラーが発生しました";
           }
           
-          if(f.type.mathc('image.*')){
+          if(f.type.match('image.*')){
             reader.onload = funciton (evt){
               var li = document.createElement('li');
               var img = document.createElement('img');
