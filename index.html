@@ -20,7 +20,7 @@
     </table>
   </section>
   <section id="file">
-　  <h3>ドラッグアンドドロップでファイルを取得します。</h3>
+　  <h3>ドラッグアンドドロップでファイルを取得</h3>
     <div id="drop" style="width:700px; height:150px; padding:10px; border:3px solid"
       ondragover="onDragOver(event)" ></div>
     <p>ファイルプロパティ表示</p>
@@ -92,7 +92,7 @@
       // ファイルの配列から1つずつファイルを選択
       for(var i=0; i< files.length; i++){
         var f = files[i];
-        info.innerHTML += "ファイル名 :" + f.name + "ファイルの型:" + f.type + "ファイルサイズ:" + f.size / 1000 + " KB " + "<br />";
+        info.innerHTML += "FileName :" + f.name + "FailType:" + f.type + "FileSize:" + f.size / 1000 + " KB " + "<br />";
         // ①FileReaderオブジェクトの生成
         var reader = new FileReader();
         // ②画像ファイルかテキストファイルかを判定
